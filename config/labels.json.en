@@ -1,0 +1,21 @@
+{
+  "ui":{ 
+    "title":"Cubes Bootstrap UI",
+    "tab1":"Simple Drill Down",
+    "h1":"Cubes Bootstrap UI",
+    "first_drill_down":"First drill down",
+    "drill_down_deeper":"Drill down deeper",
+    "please_select":"(Please select)",
+    "submit":"Submit",
+    "close":"Close",
+    "clear":"Clear"
+  },
+  "chart":{
+    "record_count":"Count"
+  },
+  "dimensions":{
+    "year":"Year",
+    "item":"Item"
+  }
+}
+

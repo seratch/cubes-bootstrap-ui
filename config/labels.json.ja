@@ -1,0 +1,21 @@
+{
+  "ui":{ 
+    "title":"Cubes と Bootstrap の Web UI",
+    "tab1":"シンプルなドリルダウン",
+    "h1":"Cubes と Bootstrap の Web UI",
+    "first_drill_down":"最初のドリルダウン",
+    "drill_down_deeper":"さらにドリルダウン",
+    "please_select":"（選択してください）",
+    "submit":"実行する",
+    "close":"閉じる",
+    "clear":"クリアする"
+  },
+  "chart":{
+    "record_count":"件数"
+  },
+  "dimensions":{ 
+    "year":"年",
+    "item":"アイテム"
+  }
+}
+
