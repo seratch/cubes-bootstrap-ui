@@ -2,7 +2,7 @@ function {{ function_name }}() {
   try {
     var data = new google.visualization.DataTable();
     data.addColumn('string', '{{ chart.label.x }}');
-    data.addColumn('number', 'record_count');
+    data.addColumn('number', '{{ labels.record_count }}');
     {% for value in chart.label.values %}
       data.addColumn('number', '{{ value }}');
     {% endfor %}

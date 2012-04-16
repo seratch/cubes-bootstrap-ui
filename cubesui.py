@@ -3,12 +3,14 @@
 
 from flask import Flask, request, render_template
 from slimit import minify
+import sys
 import urllib
 import httplib
 import json
 import codecs
 
 encoding = 'utf-8'
+config_dir = sys.argv[1] if len(sys.argv) > 1 else './config'
 
 app = Flask(__name__)
 
@@ -44,11 +46,11 @@ class CubesDimension:
     self.levels = levels
 
 print 'Loading Labels...'
-app_json = codecs.open('config/app.json', 'r', encoding).read()
+app_json = codecs.open(config_dir + '/app.json', 'r', encoding).read()
 app.appjson = json.loads(app_json)
 
 print 'Loading Labels...'
-labels_json = codecs.open('config/labels.json', 'r', encoding).read()
+labels_json = codecs.open(config_dir + '/labels.json', 'r', encoding).read()
 app.labels = json.loads(labels_json)
 
 # Cubes Model
@@ -84,7 +86,7 @@ for name, elem in app.model.get('dimensions').items():
 
 app.dimensions.sort(cmp = lambda a,b: cmp(a.name, b.name))
 
-# Labels for HTML
+# Labels as properties
 class LabelStore:
   def add(self, key, value): 
     self.__dict__[key] = value
@@ -104,6 +106,7 @@ app.ui_labels.add('clear',             ui_labels.get('clear') or 'Clear')
 app.chart_labels = {}
 chart_labels = app.labels.get('chart')
 for key in chart_labels.keys():
+  app.ui_labels.add(key, chart_labels.get(key) or key)
   app.chart_labels[key] = chart_labels.get(key) or key
 
 # Routing
@@ -133,6 +136,8 @@ def chart():
   if cut != '': 
     uri += '&cut=' + urllib.quote(cut.encode(encoding))
 
+  # TODO 
+  print uri
   cubes_conn.request('GET', uri)
   res = json.loads(cubes_conn.getresponse().read().decode(encoding))
   measure_keys = []
@@ -156,12 +161,13 @@ def chart():
   chart_values.sort(cmp = lambda a,b: cmp(b.values[0], a.values[0]))
 
   js = render_template(display_type + '.js', 
+    drilldown_key = drilldown_key,
     labels = app.ui_labels,
     function_name = function_name, 
     element_id = element_id,
     chart = Chart(
       label = ChartLabel(
-        x = app.chart_labels.get(drilldown_key) or drilldown_key, 
+        x = app.labels.get('dimensions').get(drilldown_key) or drilldown_key, 
         values = map(lambda x: app.chart_labels.get(x) or x, measure_keys)
       ),
       values = chart_values
@@ -177,11 +183,11 @@ def favicon():
 
 if __name__ == "__main__":
   app.debug = app.appjson.get('debug_mode') or False
-  print 'HTTP Server started...'
+  print 'Flask HTTP Server started...'
   app.run(
     host = app.appjson.get('server_hostname') or '0.0.0.0', 
     port = app.appjson.get('server_port') or 8000
   )
-  print 'HTTP Server stopped.'
+  print 'Flask HTTP Server stopped.'
 
 

@@ -1,8 +1,8 @@
 {
   "ui":{ 
-    "title":"Cubes と Bootstrap の Web UI",
+    "title":"Cubes と Bootstrap を使った画面",
     "tab1":"シンプルなドリルダウン",
-    "h1":"Cubes と Bootstrap の Web UI",
+    "h1":"Cubes と Bootstrap を使った画面",
     "first_drill_down":"最初のドリルダウン",
     "drill_down_deeper":"さらにドリルダウン",
     "please_select":"（選択してください）",
