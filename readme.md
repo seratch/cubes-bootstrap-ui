@@ -38,7 +38,7 @@ python cubesui.py
 
 And then acess http://localhost:8000/
 
-I'll see the following auto-generated UI.
+You'll see the following auto-generated UI.
 
 ![screenshot](https://github.com/seratch/cubes-bootstrap-ui/raw/master/doc/img/screenshot.png)
 
