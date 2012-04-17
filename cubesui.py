@@ -129,7 +129,6 @@ def simple_chart():
   element_id = request.args.get('element_id', 'chart_div')
   display_type = request.args.get('display_type', 'barchart')
 
-  # drilldown
   drilldown_key = request.args.get('drilldown', '')
   drilldown_next_depth = 0
   drilldown_topic_path = request.args.get('drilldown_topic_path', '')
@@ -157,6 +156,8 @@ def simple_chart():
     uri += '&cut=' + urllib.quote(cut.encode(encoding))
   cubes_conn.request('GET', uri)
   res = json.loads(cubes_conn.getresponse().read().decode(encoding))
+  if app.debug:
+    print res
 
   chart_values = []
   for elem in res.get('drilldown'):
