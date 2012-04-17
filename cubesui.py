@@ -15,12 +15,12 @@ config_dir = sys.argv[1] if len(sys.argv) > 1 else './config'
 app = Flask(__name__)
 
 class ChartLabel:
-  def __init__(self, x = '', values):
+  def __init__(self, x, values):
     self.x = x
     self.values = values
 
 class ChartValue:
-  def __init__(self, x = '', values):
+  def __init__(self, x, values):
     self.x = x
     self.values = values
 
