@@ -14,22 +14,22 @@ config_dir = sys.argv[1] if len(sys.argv) > 1 else './config'
 
 app = Flask(__name__)
 
-class ChartLabel:
-  def __init__(self, x, values):
+class SimpleDrilldownChartLabel:
+  def __init__(self, x, value):
     self.x = x
-    self.values = values
+    self.value = value
 
-class ChartValue:
-  def __init__(self, x, values):
+class SimpleDrilldownChartValue:
+  def __init__(self, x, value):
     self.x = x
-    self.values = values
+    self.value = value
 
-class Chart:
+class SimpleDrilldownChart:
   def __init__(self, label, values):
-    if not isinstance(label, ChartLabel):
-      raise ValueError('label should be an array of ChartLabel', label)
-    if len(values) and not isinstance(values[0], ChartValue):
-      raise ValueError('values should be an array of ChartValue', values)
+    if not isinstance(label, SimpleDrilldownChartLabel):
+      raise ValueError('label should be a SimpleDrilldownChartLabel value', label)
+    if len(values) and not isinstance(values[0], SimpleDrilldownChartValue):
+      raise ValueError('value should be an array of SimpleDrilldownChartValue', value)
     self.label = label
     self.values = values
 
@@ -120,10 +120,10 @@ def index():
     dimensions = app.dimensions
   )
 
-@app.route('/chart')
-def chart():
+@app.route('/simple/chart')
+def simple_chart():
+  measure = app.appjson.get('measure', 'record_count')
   function_name = request.args.get('function_name', 'displayChart')
-  with_measures = request.args.get('with_measures', False)
   element_id = request.args.get('element_id', 'chart_div')
   display_type = request.args.get('display_type', 'barchart')
   drilldown_key = request.args.get('drilldown', '')
@@ -142,38 +142,32 @@ def chart():
   uri = "/aggregate?drilldown=" + drilldown_key
   if cut != '': 
     uri += '&cut=' + urllib.quote(cut.encode(encoding))
-
   cubes_conn.request('GET', uri)
   res = json.loads(cubes_conn.getresponse().read().decode(encoding))
-  measure_keys = []
-  if with_measures:
-    for key in res['drilldown'][0]:
-      if p_sum.match(key):
-        measure_keys.append(str(key))
 
   chart_values = []
   for elem in res.get('drilldown'):
     x = elem.get(drilldown_key) 
     if not x:
       x = elem.get(filter(lambda e: e.startswith(drilldown_key), elem)[0])
+    value = elem.get(measure)
+    chart_values.append(
+      SimpleDrilldownChartValue(
+        x = app.chart_labels.get(drilldown_key + '.' + str(x)) or x, 
+        value = value
+      )
+    )
+  chart_values.sort(cmp = lambda a,b: cmp(b.value, a.value))
 
-    measures = []
-    measures.append(elem['record_count'])
-    for measure_key in measure_keys:
-      measures.append(elem[measure_key])
-    chart_values.append(ChartValue(x = app.chart_labels.get(drilldown_key + '.' + str(x)) or x, values = measures))
-
-  chart_values.sort(cmp = lambda a,b: cmp(b.values[0], a.values[0]))
-
-  js = render_template(display_type + '.js', 
+  js = render_template('simple/' + display_type + '.js', 
     drilldown_key = drilldown_key,
     labels = app.ui_labels,
     function_name = function_name, 
     element_id = element_id,
-    chart = Chart(
-      label = ChartLabel(
+    chart = SimpleDrilldownChart(
+      label = SimpleDrilldownChartLabel(
         x = app.labels.get('dimensions').get(drilldown_key) or drilldown_key, 
-        values = map(lambda x: app.chart_labels.get(x) or x, measure_keys)
+        value = app.chart_labels.get(measure) or measure
       ),
       values = chart_values
     )

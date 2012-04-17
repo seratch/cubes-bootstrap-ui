@@ -2,15 +2,11 @@ function {{ function_name }}() {
   try {
     var data = new google.visualization.DataTable();
     data.addColumn('string', '{{ chart.label.x }}');
-    {% set record_count = labels.record_count or 'Count' %}
-    data.addColumn('number', '{{ record_count }}');
-    {% for value in chart.label.values %}
-      data.addColumn('number', '{{ value }}');
-    {% endfor %}
+    data.addColumn('number', '{{ chart.label.value }}');
 
     var rows = [];
     {% for data in chart.values %}
-      rows.push(['{{ data.x }}'{% for value in data.values %},{{ value }}{% endfor %}]);
+      rows.push(['{{ data.x }}',{{ data.value }}]);
     {% endfor %}
     data.addRows(rows);
 
@@ -38,7 +34,7 @@ function {{ function_name }}() {
             var drilldownKey = $('#drilldown_deeper_dialog_select option:selected').val();
             var cutName = encodeURIComponent('{{ drilldown_key }}');
             var cutValue = encodeURIComponent(selectedValue);
-            var baseUrl = '/chart?drilldown=' + drilldownKey + '&cut=' + cutName + ':' + cutValue; 
+            var baseUrl = '/simple/chart?drilldown=' + drilldownKey + '&cut=' + cutName + ':' + cutValue; 
             var displayChildChartUrl = baseUrl + '&display_type=piechart&element_id=child_chart_div&function_name=displayChildChart';
             loadFunction(displayChildChartUrl);
             $('#child_chart_title').text('"{{ chart.label.x }} : ' + selectedValue + '" > "' + drilldownKeyLabel + '"');

@@ -12,6 +12,7 @@
   },
   "chart":{
     "record_count":"Count",
+    "amount_sum":"Amount Sum",
     "item.a":"Aseets",
     "item.e":"Equity",
     "item.l":"Liabilities"

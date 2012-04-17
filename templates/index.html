@@ -89,7 +89,7 @@ initDimensionsSelectBox(dialogSelectBox);
 removeOptionFromSelectBox(dialogSelectBox, '{{ drilldown_key }}');
 
 {% if drilldown_key != '' %}
-var baseUrl = '/chart?drilldown={{ drilldown_key }}';
+var baseUrl = '/simple/chart?drilldown={{ drilldown_key }}';
 var displayTableUrl = baseUrl + '&display_type=table&element_id=table_div&function_name=displayTable';
 var displayChartUrl = baseUrl + '&display_type=barchart&element_id=chart_div&function_name=displayChart';
 loadFunction(displayTableUrl);

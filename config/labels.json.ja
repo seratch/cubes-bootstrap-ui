@@ -12,13 +12,14 @@
   },
   "chart":{
     "record_count":"件数",
+    "amount_sum":"総計",
     "item.a":"資産",
     "item.e":"資本",
     "item.l":"負債"
   },
   "dimensions":{ 
     "year":"年",
-    "item":"アイテム"
+    "item":"項目"
   }
 }
 

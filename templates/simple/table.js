@@ -2,18 +2,15 @@ function {{ function_name }}() {
   try {
     var data = new google.visualization.DataTable();
     data.addColumn('string', '{{ chart.label.x }}');
-    data.addColumn('number', '{{ labels.record_count }}');
-    {% for value in chart.label.values %}
-      data.addColumn('number', '{{ value }}');
-    {% endfor %}
+    data.addColumn('number', '{{ chart.label.value }}');
+
     data.addRows({{ chart.values|length }});
     {% for value in chart.values %}
       {% set cell_index = loop.index0 %}
       data.setCell({{ cell_index }},0,'{{ value.x }}');
-      {% for v in value.values %}
-        data.setCell({{ cell_index }},{{ loop.index }},{{ v }});
-      {% endfor %}
+      data.setCell({{ cell_index }},1,{{ value.value }});
     {% endfor %}
+
     var tableDiv = $('#{{ element_id }}')[0];
     {% if chart.values|length > 20 %}
       tableDiv.style.height = '400px';
