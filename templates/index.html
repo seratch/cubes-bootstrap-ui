@@ -28,16 +28,13 @@
  </fieldset>
 </form>
 
-<h3 id="child_chart_title"></h3>
-<hr/>
-<div id="child_chart_div"></div>
+<div id="child_charts_div"></div>
 <hr/>
 <h3 id="chart_div_title"></h3>
 <hr/>
 <div id="chart_div"></div>
 <hr/>
 <div id="table_div"></div>
-
 
 <!-- 
  ////////// Drill down deep select dialog //////////
@@ -74,7 +71,7 @@
 <script type="text/javascript">//<![CDATA[
 
 function initDimensionsSelectBox(selectbox) {
-  for (var i = 0; i < selectbox.options.length; i++) {
+  for (var i = selectbox.options.length; i >= 0; i--) {
     selectbox.options.remove(selectbox.options[i]);
   }
   var empty = $('<option>').text('{{ labels.please_select }}').val('');
@@ -96,6 +93,7 @@ loadFunction(displayTableUrl);
 loadFunction(displayChartUrl);
 google.setOnLoadCallback(displayTable);
 google.setOnLoadCallback(displayChart);
+
 {% endif %}
 
 //]]></script>

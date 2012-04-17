@@ -48,6 +48,7 @@ class CubesDimension:
 print 'Loading app.json...'
 app_json = codecs.open(config_dir + '/app.json', 'r', encoding).read()
 app.appjson = json.loads(app_json)
+app.debug = app.appjson.get('debug_mode') or False
 
 print 'Loading labels.json...'
 labels_json = codecs.open(config_dir + '/labels.json', 'r', encoding).read()
@@ -123,18 +124,30 @@ def index():
 @app.route('/simple/chart')
 def simple_chart():
   measure = app.appjson.get('measure', 'record_count')
+
   function_name = request.args.get('function_name', 'displayChart')
   element_id = request.args.get('element_id', 'chart_div')
   display_type = request.args.get('display_type', 'barchart')
+
+  # drilldown
   drilldown_key = request.args.get('drilldown', '')
+  drilldown_next_depth = 0
+  drilldown_topic_path = request.args.get('drilldown_topic_path', '')
 
   cut = request.args.get('cut', '')
+  cut_keys = []
   if cut != '': 
-    [cut_key, cut_value] = cut.split(':')
-    items_cut_value_matched = filter(lambda (k,v): v == cut_value, app.chart_labels.items())
-    if len(items_cut_value_matched) > 0:
-      value = items_cut_value_matched[0][0]
-      cut = cut_key + ':' + value.split('.')[-1]
+    cut_list = []
+    for each_cut in cut.split('|'):
+      [cut_key, cut_value] = each_cut.split(':')
+      cut_keys.append(cut_key)
+      items_cut_value_matched = filter(lambda (k,v): v == cut_value, app.chart_labels.items())
+      if len(items_cut_value_matched) > 0:
+        value = items_cut_value_matched[0][0]
+        each_cut = cut_key + ':' + value.split('.')[-1]
+      cut_list.append(each_cut)
+    drilldown_next_depth = len(cut_list) 
+    cut = '|'.join(cut_list)
 
   if drilldown_key == '': 
     return 'function ' + function_name + '() {}'
@@ -161,6 +174,10 @@ def simple_chart():
 
   js = render_template('simple/' + display_type + '.js', 
     drilldown_key = drilldown_key,
+    drilldown_next_depth = drilldown_next_depth,
+    drilldown_topic_path = drilldown_topic_path,
+    cut = cut,
+    cut_keys = cut_keys,
     labels = app.ui_labels,
     function_name = function_name, 
     element_id = element_id,
@@ -172,6 +189,8 @@ def simple_chart():
       values = chart_values
     )
   )
+  if app.debug:
+    print js
   return minify(js)
 
 @app.route('/favicon.ico')
@@ -181,7 +200,6 @@ def favicon():
 # --- Server invocation ---
 
 if __name__ == "__main__":
-  app.debug = app.appjson.get('debug_mode') or False
   print 'Flask HTTP Server started...'
   app.run(
     host = app.appjson.get('server_hostname') or '0.0.0.0', 

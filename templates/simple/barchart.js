@@ -29,19 +29,40 @@ function {{ function_name }}() {
         if (mightBeSeveral.length == 1) {
           var selected = mightBeSeveral[0];
           var selectedValue = data.getValue(selected.row, 0);
+
+          $('#drilldown_dialog_submit').off('click');
           $('#drilldown_dialog_submit').click(function(e) {
+            var titleElementId = 'child_chart_0_title';
+            var chartElementId = 'child_chart_0_div';
+
             var drilldownKeyLabel = $('#drilldown_dialog_select option:selected').text();
             var drilldownKey = $('#drilldown_dialog_select option:selected').val();
-            var cutName = encodeURIComponent('{{ drilldown_key }}');
-            var cutValue = encodeURIComponent(selectedValue);
-            var baseUrl = '/simple/chart?drilldown=' + drilldownKey + '&cut=' + cutName + ':' + cutValue; 
-            var displayChildChartUrl = baseUrl + '&display_type=piechart&element_id=child_chart_div&function_name=displayChildChart';
+            var drilldownTopicPath = '"{{ chart.label.x }} : ' + selectedValue;
+            var drilldownCurrentTopicPath = drilldownTopicPath + '" > "' + drilldownKeyLabel + '"';
+
+            var displayChildChartUrl = '/simple/chart'
+              + '?drilldown=' + drilldownKey
+              + '&cut=' + encodeURIComponent('{{ drilldown_key }}') + ':' + encodeURIComponent(selectedValue)
+              + '&display_type=piechart'
+              + '&element_id=' + chartElementId
+              + '&drilldown_topic_path=' + encodeURIComponent(drilldownTopicPath)
+              + '&function_name=displayChildChart_0';
+
             loadFunction(displayChildChartUrl);
-            $('#child_chart_title').text('"{{ chart.label.x }} : ' + selectedValue + '" > "' + drilldownKeyLabel + '"');
-            var childChartDiv = $('#child_chart_div')[0];
-            childChartDiv.style.height = '400px';
-            displayChildChart();
+
+            var $childChartsDiv = $('#child_charts_div');
+            $childChartsDiv.empty(); // remove all children
+            var $chartTitle = $('<div>').attr({id:titleElementId})
+              .append($('<h3>').text(drilldownCurrentTopicPath))
+              .append($('<hr>'));
+            $childChartsDiv.append($chartTitle);
+
+            var $chartDiv = $('<div>').attr({id:chartElementId}).css('height','400px');
+            $childChartsDiv.append($chartDiv);
+
+            displayChildChart_0();
           });
+
           $('#drilldown_dialog_title').text('"{{ chart.label.x }} : ' + selectedValue + '"');
           $('#launch_drilldown_dialog').trigger('click');
         }
