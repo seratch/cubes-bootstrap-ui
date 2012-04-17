@@ -126,8 +126,15 @@ def chart():
   with_measures = request.args.get('with_measures', False)
   element_id = request.args.get('element_id', 'chart_div')
   display_type = request.args.get('display_type', 'barchart')
-  cut = request.args.get('cut', '')
   drilldown_key = request.args.get('drilldown', '')
+
+  cut = request.args.get('cut', '')
+  if cut != '': 
+    [cut_key, cut_value] = cut.split(':')
+    items_cut_value_matched = filter(lambda (k,v): v == cut_value, app.chart_labels.items())
+    if len(items_cut_value_matched) > 0:
+      value = items_cut_value_matched[0][0]
+      cut = cut_key + ':' + value.split('.')[-1]
 
   if drilldown_key == '': 
     return 'function ' + function_name + '() {}'
