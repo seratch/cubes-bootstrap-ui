@@ -11,7 +11,10 @@
     "clear":"Clear"
   },
   "chart":{
-    "record_count":"Count"
+    "record_count":"Count",
+    "item.a":"Aseets",
+    "item.e":"Equity",
+    "item.l":"Liabilities"
   },
   "dimensions":{
     "year":"Year",

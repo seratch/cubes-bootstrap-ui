@@ -11,7 +11,10 @@
     "clear":"クリアする"
   },
   "chart":{
-    "record_count":"件数"
+    "record_count":"件数",
+    "item.a":"資産",
+    "item.e":"資本",
+    "item.l":"負債"
   },
   "dimensions":{ 
     "year":"年",
