@@ -136,8 +136,6 @@ def chart():
   if cut != '': 
     uri += '&cut=' + urllib.quote(cut.encode(encoding))
 
-  # TODO 
-  print uri
   cubes_conn.request('GET', uri)
   res = json.loads(cubes_conn.getresponse().read().decode(encoding))
   measure_keys = []
