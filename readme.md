@@ -4,15 +4,29 @@ Bootstrap UI for Cubes. https://github.com/Stiivi/cubes
 
 ## Requirement
 
-Already running Cubes server and
+### Python
+
+Python 2.7.2
+
+### Setup Cubes server
+
+```sh
+pip install sqlalchemy werkzeug
+pip install cubes
+
+git clone git://github.com/Stiivi/cubes.git
+cd cubes
+cd examples/hello_world
+
+python prepare_data.py
+slicer serve slicer.ini
+```
+
+### Setup Cubes Bootstrap UI
 
 ```sh
 pip install flask slimit 
-```
 
-## Run it
-
-```sh
 git clone https://github.com/seratch/cubes-bootstrap-ui.git
 cd cubes-bootstrap-ui/
 python cubesui.py
@@ -20,5 +34,7 @@ python cubesui.py
 
 And then acess http://localhost:8000/
 
-Have a fun!
+I'll see the following auto-generated UI.
+
+![screenshot](https://github.com/seratch/cubes-bootstrap-ui/raw/master/doc/img/screenshot.png)
 
