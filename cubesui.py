@@ -45,11 +45,11 @@ class CubesDimension:
     self.label = label
     self.levels = levels
 
-print 'Loading Labels...'
+print 'Loading app.json...'
 app_json = codecs.open(config_dir + '/app.json', 'r', encoding).read()
 app.appjson = json.loads(app_json)
 
-print 'Loading Labels...'
+print 'Loading labels.json...'
 labels_json = codecs.open(config_dir + '/labels.json', 'r', encoding).read()
 app.labels = json.loads(labels_json)
 
