@@ -12,7 +12,15 @@ class CubesUITestCase(unittest.TestCase):
 
   def test_index(self):
     resp = self.c.get('/')
-    assert 'xxx' in resp.data
+    assert 'Cubes Bootstrap UI' in resp.data
+
+  def test_simple_chart_1(self):
+    resp = self.c.get('/simple/chart')
+    assert 'function displayChart() {}' in resp.data
+
+  def test_simple_chart_2(self):
+    resp = self.c.get('/simple/chart?function_name=foo')
+    assert 'function foo() {}' in resp.data
 
 if __name__ == '__main__':
     unittest.main()
