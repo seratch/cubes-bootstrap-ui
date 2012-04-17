@@ -36,8 +36,8 @@ function {{ function_name }}() {
           $('#drilldown_deeper_dialog_submit').click(function(e) {
             var drilldownKeyLabel = $('#drilldown_deeper_dialog_select option:selected').text();
             var drilldownKey = $('#drilldown_deeper_dialog_select option:selected').val();
-            var cutName = '{{ drilldown_key }}';
-            var cutValue = selectedValue;
+            var cutName = encodeURIComponent('{{ drilldown_key }}');
+            var cutValue = encodeURIComponent(selectedValue);
             var baseUrl = '/chart?drilldown=' + drilldownKey + '&cut=' + cutName + ':' + cutValue; 
             var displayChildChartUrl = baseUrl + '&display_type=piechart&element_id=child_chart_div&function_name=displayChildChart';
             loadFunction(displayChildChartUrl);
