@@ -11,7 +11,7 @@
 <form id="cubes_ui_form" class="form-horizontal" method="GET">
 <fieldset>
   <div class="control-group">
-    <label class="control-label">{{ labels.first_drill_down }}:</label>
+    <label class="control-label">{{ labels.query }}:</label>
     <div class="controls">
       <select id="first_drilldown_select" name="drilldown"></select>
     </div>
@@ -43,20 +43,20 @@
  ////////// Drill down deep select dialog //////////
 -->
 
-<a id="launch_drilldown_deeper_dialog" class="btn hide" data-toggle="modal" href="#drilldown_deeper_dialog" >Launch Drill-down-deep Modal</a>
+<a id="launch_drilldown_dialog" class="btn hide" data-toggle="modal" href="#drilldown_dialog" >Launch Drill-down-deep Modal</a>
 
-<div class="modal hide fade" id="drilldown_deeper_dialog">
+<div class="modal hide fade" id="drilldown_dialog">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
-    <h3 id='drilldown_deeper_dialog_title'>{{ labels.drill_down_deeper }}<!-- default value --></h3>
+    <h3 id='drilldown_dialog_title'>{{ labels.drill_down }}<!-- default value --></h3>
   </div>
   <div class="modal-body">
-<form id="drilldown_deeper_dialog_form" class="form-horizontal" method="GET">
+<form id="drilldown_dialog_form" class="form-horizontal" method="GET">
 <fieldset>
   <div class="control-group">
-    <label class="control-label">{{ labels.drill_down_deeper }}:</label>
+    <label class="control-label">{{ labels.drill_down }}:</label>
     <div class="controls">
-      <select id='drilldown_deeper_dialog_select' name="dimension"></select>
+      <select id='drilldown_dialog_select' name="dimension"></select>
     </div>
   </div>
  </fieldset>
@@ -64,7 +64,7 @@
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal">{{ labels.close }}</button>
-    <button class="btn btn-primary" id="drilldown_deeper_dialog_submit" data-dismiss="modal" data-loading-text="Now Loading..." >{{ labels.submit }}</button>
+    <button class="btn btn-primary" id="drilldown_dialog_submit" data-dismiss="modal" data-loading-text="Now Loading..." >{{ labels.submit }}</button>
   </div>
 </div>
 
@@ -84,7 +84,7 @@ function initDimensionsSelectBox(selectbox) {
 var firstDrilldownSelectBox = $('#first_drilldown_select')[0];
 initDimensionsSelectBox(firstDrilldownSelectBox);
 
-var dialogSelectBox = $('#drilldown_deeper_dialog_select')[0];
+var dialogSelectBox = $('#drilldown_dialog_select')[0];
 initDimensionsSelectBox(dialogSelectBox);
 removeOptionFromSelectBox(dialogSelectBox, '{{ drilldown_key }}');
 

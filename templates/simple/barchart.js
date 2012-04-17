@@ -29,9 +29,9 @@ function {{ function_name }}() {
         if (mightBeSeveral.length == 1) {
           var selected = mightBeSeveral[0];
           var selectedValue = data.getValue(selected.row, 0);
-          $('#drilldown_deeper_dialog_submit').click(function(e) {
-            var drilldownKeyLabel = $('#drilldown_deeper_dialog_select option:selected').text();
-            var drilldownKey = $('#drilldown_deeper_dialog_select option:selected').val();
+          $('#drilldown_dialog_submit').click(function(e) {
+            var drilldownKeyLabel = $('#drilldown_dialog_select option:selected').text();
+            var drilldownKey = $('#drilldown_dialog_select option:selected').val();
             var cutName = encodeURIComponent('{{ drilldown_key }}');
             var cutValue = encodeURIComponent(selectedValue);
             var baseUrl = '/simple/chart?drilldown=' + drilldownKey + '&cut=' + cutName + ':' + cutValue; 
@@ -42,11 +42,11 @@ function {{ function_name }}() {
             childChartDiv.style.height = '400px';
             displayChildChart();
           });
-          $('#drilldown_deeper_dialog_title').text('"{{ chart.label.x }} : ' + selectedValue + '"');
-          $('#launch_drilldown_deeper_dialog').trigger('click');
+          $('#drilldown_dialog_title').text('"{{ chart.label.x }} : ' + selectedValue + '"');
+          $('#launch_drilldown_dialog').trigger('click');
         }
       } catch(e) {
-        console.log('Failed to load the drill down deeper dialog. (' + e + ')');
+        console.log('Failed to load the drill down dialog. (' + e + ')');
       }
     });
   } catch(e) {
