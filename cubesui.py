@@ -154,7 +154,7 @@ def chart():
     measures.append(elem['record_count'])
     for measure_key in measure_keys:
       measures.append(elem[measure_key])
-    chart_values.append(ChartValue(x = x, values = measures))
+    chart_values.append(ChartValue(x = app.chart_labels.get(drilldown_key + '.' + str(x)) or x, values = measures))
 
   chart_values.sort(cmp = lambda a,b: cmp(b.values[0], a.values[0]))
 
