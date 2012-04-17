@@ -1,6 +1,10 @@
 ## Cubes Bootstrap UI
 
-Bootstrap UI for Cubes. https://github.com/Stiivi/cubes
+Bootstrap UI for Cubes with Google Visualization API. 
+
+- Cubes 
+
+https://github.com/Stiivi/cubes
 
 ## Requirement
 
