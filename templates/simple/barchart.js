@@ -30,6 +30,10 @@ function {{ function_name }}() {
           var selected = mightBeSeveral[0];
           var selectedValue = data.getValue(selected.row, 0);
 
+          var dialogSelectBox = $('#drilldown_dialog_select')[0];
+          initDimensionsSelectBox(dialogSelectBox);
+          removeOptionFromSelectBox(dialogSelectBox, '{{ drilldown_key }}');
+
           $('#drilldown_dialog_submit').off('click');
           $('#drilldown_dialog_submit').click(function(e) {
             var titleElementId = 'child_chart_0_title';
