@@ -1,7 +1,7 @@
 {
   "cubes_hostname":"localhost",
   "cubes_port":5000,
-  "debug_mode":true,
+  "debug_mode":false,
   "measure":"amount_sum",
   "server_hostname":"0.0.0.0",
   "server_port":8000
