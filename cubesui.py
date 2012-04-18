@@ -85,7 +85,7 @@ for name, elem in app.model.get('dimensions').items():
     )
   )
 
-app.dimensions.sort(cmp = lambda a,b: cmp(a.name, b.name))
+app.dimensions.sort(cmp = lambda a,b: cmp(a.label, b.label))
 
 # Labels as properties
 class LabelStore:
