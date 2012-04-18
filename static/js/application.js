@@ -25,8 +25,8 @@ function loadFunction(url) {
 function removeOptionFromSelectBox(selectbox, value) {
   for (var i = 0; i < selectbox.options.length; i++) {
     var option = selectbox.options[i];
-    if (option.value == value) {
-      selectbox.options.remove(option);
+    if (typeof option != 'undefined' && option.value == value) {
+      $(option).remove();
       break;
     }
   }
