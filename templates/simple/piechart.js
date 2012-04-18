@@ -42,8 +42,8 @@ function {{ function_name }}() {
  
             var drilldownKeyLabel = $('#drilldown_dialog_select option:selected').text();
             var drilldownKey = $('#drilldown_dialog_select option:selected').val();
-            var drilldownTopicPath = '{{ drilldown_topic_path }} > "{{ chart.label.x }} : ' + selectedValue;
-            var drilldownCurrentTopicPath = drilldownTopicPath + '" > "' + drilldownKeyLabel + '"';
+            var drilldownTopicPath = '{{ drilldown_topic_path }} > "{{ chart.label.x }} : ' + selectedValue + '"';
+            var drilldownCurrentTopicPath = drilldownTopicPath + ' > "' + drilldownKeyLabel + '"';
 
             var displayChildChartUrl = '/simple/chart' 
               + '?drilldown=' + drilldownKey 
