@@ -15,6 +15,7 @@ if test "$a" = "y"; then
   rm -f $1/sync.sh
   rm -f $1/readme.md
   rm -rf $1/doc
+  rm -rf $1/iris_cubes
 else
   echo "Bye."
   exit 0
