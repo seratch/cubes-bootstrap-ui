@@ -16,27 +16,33 @@ http://cubes.seratch.net/
 
 Python 2.7.2
 
-### Setup Cubes server
+### Setup
+
+Clone the app:
 
 ```sh
+git clone https://github.com/seratch/cubes-bootstrap-ui.git
+```
+
+Setup Cubes server:
+
+```sh
+# cubes required
 pip install sqlalchemy werkzeug
 pip install cubes
 
-git clone git://github.com/Stiivi/cubes.git
-cd cubes
-cd examples/hello_world
-
-python prepare_data.py
+# invoke Cubes server
+cd cubes-bootstrap-ui/iris_cubes
+# invoke app
 slicer serve slicer.ini
 ```
 
-### Setup Cubes Bootstrap UI
+On a different terminal, invoke cubes-bootstrap-ui:
 
 ```sh
+# cubes-bootstrap-ui required
 pip install flask slimit 
-
-git clone https://github.com/seratch/cubes-bootstrap-ui.git
-cd cubes-bootstrap-ui/
+# invoke app
 python cubesui.py
 ```
 

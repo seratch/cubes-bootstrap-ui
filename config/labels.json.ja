@@ -1,25 +1,24 @@
 {
   "ui":{ 
-    "title":"Cubes と Bootstrap を使った画面",
-    "tab1":"シンプルなドリルダウン",
-    "h1":"Cubes と Bootstrap を使った画面",
-    "query":"絞り込み",
+    "title":"cubes-bootstrap-ui デモ",
+    "tab1":"あやめデータセット",
+    "h1":"cubes-bootstrap-ui デモ",
+    "query":"絞り込み条件",
     "drill_down":"ドリルダウン",
-    "please_select":"（選択してください）",
+    "please_select":"選択してください",
     "submit":"実行する",
     "close":"閉じる",
     "clear":"クリアする"
   },
   "chart":{
-    "record_count":"件数",
-    "amount_sum":"総計",
-    "item.a":"資産",
-    "item.e":"資本",
-    "item.l":"負債"
+    "record_count":"件数"
   },
-  "dimensions":{ 
-    "year":"年",
-    "item":"項目"
+  "dimensions":{
+    "sepal_length":"がく片長さ", 
+    "sepal_width":"がく片幅", 
+    "petal_length":"花びら長さ", 
+    "petal_width":"花びら幅", 
+    "species":"品種"
   }
 }
 

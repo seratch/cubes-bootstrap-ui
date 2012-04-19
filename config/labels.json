@@ -1,8 +1,8 @@
 {
   "ui":{ 
-    "title":"Cubes Bootstrap UI",
-    "tab1":"Simple Drill Down",
-    "h1":"Cubes Bootstrap UI",
+    "title":"cubes-bootstrap-ui demo",
+    "tab1":"Iris data set",
+    "h1":"cubes-bootstrap-ui demo",
     "query":"Query",
     "drill_down":"Drill down",
     "please_select":"(Please select)",
@@ -11,15 +11,14 @@
     "clear":"Clear"
   },
   "chart":{
-    "record_count":"Count",
-    "amount_sum":"Amount Sum",
-    "item.a":"Assets",
-    "item.e":"Equity",
-    "item.l":"Liabilities"
+    "record_count":"Count"
   },
   "dimensions":{
-    "year":"Year",
-    "item":"Item"
+    "sepal_length":"Sepal Length", 
+    "sepal_width":"Sepal Width", 
+    "petal_length":"Petal Length", 
+    "petal_width":"Petal Width", 
+    "species":"Species"
   }
 }
 

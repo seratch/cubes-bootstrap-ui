@@ -1,8 +1,0 @@
-{
-  "cubes_hostname":"localhost",
-  "cubes_port":5000,
-  "debug_mode":true,
-  "measure":"record_count",
-  "server_hostname":"0.0.0.0",
-  "server_port":8000
-}
