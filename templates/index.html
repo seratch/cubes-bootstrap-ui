@@ -13,7 +13,7 @@
   <div class="control-group">
     <label class="control-label">{{ labels.query }}:</label>
     <div class="controls">
-      <select id="first_drilldown_select" name="drilldown"></select>
+      <select id="query_select" name="query"></select>
     </div>
   </div>
   <div class="form-actions">
@@ -21,7 +21,7 @@
     &nbsp;
     <button class="btn" onclick="
      var form = $('#cubes_ui_form')[0];
-     form.drilldown.value = '';
+     form.query.value = '';
      form.submit();
     ">{{ labels.clear }}</button>
    </div>
@@ -76,17 +76,17 @@ function initDimensionsSelectBox(selectbox) {
   }
   var empty = $('<option>').text('{{ labels.please_select }}').val('');
   $(selectbox).append(empty);
-  $(selectbox){% for dim in dimensions %}.append($('<option>').text('{{ dim.label }}').val('{{ dim.name }}'){% if dim.name == drilldown_key %}.attr('selected', 'selected'){% endif %}){% endfor %};
+  $(selectbox){% for dim in dimensions %}.append($('<option>').text('{{ dim.label }}').val('{{ dim.name }}'){% if dim.name == query %}.attr('selected', 'selected'){% endif %}){% endfor %};
 }
-var firstDrilldownSelectBox = $('#first_drilldown_select')[0];
-initDimensionsSelectBox(firstDrilldownSelectBox);
+var querySelectBox = $('#query_select')[0];
+initDimensionsSelectBox(querySelectBox);
 
 var dialogSelectBox = $('#drilldown_dialog_select')[0];
 initDimensionsSelectBox(dialogSelectBox);
-removeOptionFromSelectBox(dialogSelectBox, '{{ drilldown_key }}');
+removeOptionFromSelectBox(dialogSelectBox, '{{ query }}');
 
-{% if drilldown_key != '' %}
-var baseUrl = '/simple/chart?drilldown={{ drilldown_key }}';
+{% if query != '' %}
+var baseUrl = '/simple/chart?drilldown={{ query }}';
 var displayTableUrl = baseUrl + '&display_type=table&element_id=table_div&function_name=displayTable';
 var displayChartUrl = baseUrl + '&display_type=barchart&element_id=chart_div&function_name=displayChart';
 loadFunction(displayTableUrl);

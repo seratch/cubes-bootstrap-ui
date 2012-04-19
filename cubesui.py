@@ -114,10 +114,10 @@ for key in chart_labels.keys():
 
 @app.route('/')
 def index():
-  drilldown_key = request.args.get('drilldown', '')
+  query = request.args.get('query', '')
   return render_template('index.html', 
     labels = app.ui_labels,
-    drilldown_key = drilldown_key,
+    query = query,
     dimensions = app.dimensions
   )
 
