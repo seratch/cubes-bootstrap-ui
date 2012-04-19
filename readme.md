@@ -6,6 +6,10 @@ https://github.com/Stiivi/cubes
 
 https://developers.google.com/chart/
 
+## Demo
+
+http://cubes.seratch.net/
+
 ## Requirement
 
 ### Python
